@@ -16,3 +16,7 @@ def warehouse_storage():
 @app.post("/warehouse/insert", status_code=200)
 def warehouse_insert(item: Item):
     return queries.warehouse_insert(item)
+
+@app.post("/warehouse/delete", status_code=200)
+def warehouse_delete(id: int):
+    return queries.warehouse_delete(id)

@@ -21,3 +21,15 @@ def warehouse_select():
 
     cursor.close()
     mydb.close()
+
+def warehouse_delete(ID):
+    cursor = mydb.cursor()
+
+    cursor.execute('DELETE FROM warehouse WHERE warehouse.ID = %s', [ID])
+    mydb.commit()
+
+    cursor.execute("SELECT * FROM warehouse")
+    return cursor.fetchall()
+
+    cursor.close()
+    mydb.close()
