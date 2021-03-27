@@ -36,3 +36,12 @@ def warehouse_delete(ID):
 
     cursor.close()
     mydb.close()
+
+def client_select():
+    cursor = mydb.cursor()
+
+    cursor.execute("SELECT name, quantity, price FROM warehouse")
+    return cursor.fetchall()
+
+    cursor.close()
+    mydb.close()
