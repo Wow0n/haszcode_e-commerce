@@ -1,22 +1,22 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+
 import queries
+import tags
+import models
 
-app = FastAPI()
+app = FastAPI(openapi_tags=tags.tags_metadata)
 
-class Item(BaseModel):
-    name: str
-    quantity: int
-    price: float
 
-@app.post("/warehouse/select", status_code=200)
+@app.post("/warehouse/select/", status_code=200, tags=["Warehouse"])
 def warehouse_storage():
     return queries.warehouse_select()
 
-@app.post("/warehouse/insert", status_code=200)
-def warehouse_insert(item: Item):
+
+@app.post("/warehouse/insert/", status_code=200, tags=["Warehouse"])
+def warehouse_insert(item: models.Item):
     return queries.warehouse_insert(item)
 
-@app.post("/warehouse/delete", status_code=200)
+
+@app.post("/warehouse/delete/", status_code=200, tags=["Warehouse"])
 def warehouse_delete(id: int):
     return queries.warehouse_delete(id)
