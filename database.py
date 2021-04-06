@@ -1,9 +1,22 @@
 import psycopg2
+from sqlalchemy import create_engine
+from sqlalchemy import Column, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
-mydb = psycopg2.connect(
-    host="host.docker.internal",
-    port="5432",
-    user="postgres",
-    password="password",
-    database="DunderMifflin"
-)
+db_string = "postgresql://postgres:password@host.docker.internal:5432/DunderMifflin"
+db = create_engine(db_string)
+base = declarative_base()
+
+class Warehouse(base):
+    __tablename__ = 'warehouse'
+
+    id = Column(String, primary_key=True)
+    name = Column(String)
+    quantity = Column(String)
+    price = Column(String)
+
+Session = sessionmaker(db)
+session = Session()
+
+base.metadata.create_all(db)
