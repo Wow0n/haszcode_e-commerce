@@ -12,14 +12,20 @@ def warehouse_storage():
     return queries.warehouse_select()
 
 
-@app.post("/warehouse/insert", status_code=201, tags=["Warehouse"])
+@app.post("/warehouse/insert", status_code=200, tags=["Warehouse"])
 def warehouse_insert(item: models.Item):
     return queries.warehouse_insert(item)
+
+
+@app.post("/warehouse/update", status_code=200, tags=["Warehouse"])
+def warehouse_update(item: models.Item):
+    return queries.warehouse_update(item)
 
 
 @app.delete("/warehouse/delete", status_code=200, tags=["Warehouse"])
 def warehouse_delete(id: int):
     return queries.warehouse_delete(id)
+
 
 @app.get("/client/select", status_code=200, tags=["Client"])
 def client_product_list():
