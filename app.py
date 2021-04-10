@@ -13,13 +13,13 @@ def warehouse_storage():
 
 
 @app.post("/warehouse/insert", status_code=200, tags=["Warehouse"])
-def warehouse_insert(item: models.Item):
-    return queries.warehouse_insert(item)
+def warehouse_insert(item_insert: models.ItemInsert):
+    return queries.warehouse_insert(item_insert)
 
 
 @app.post("/warehouse/update", status_code=200, tags=["Warehouse"])
-def warehouse_update(item: models.Item):
-    return queries.warehouse_update(item)
+def warehouse_update(item_update: models.ItemUpdate):
+    return queries.warehouse_update(item_update)
 
 
 @app.delete("/warehouse/delete", status_code=200, tags=["Warehouse"])

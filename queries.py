@@ -2,13 +2,18 @@ from database import session, Warehouse
 
 
 def warehouse_insert(item):
-    temp = Warehouse(name=item.name, quantity=item.quantity, price=item.price)
-    session.add(temp)
+    record = Warehouse(name=item.name, quantity=item.quantity, price=item.price)
+    session.add(record)
     session.commit()
+    return "record added"
 
 
 def warehouse_update(item):
-    print("dupa")
+    record = session.query(Warehouse).get(item.id)
+    record.name = item.name
+    record.quantity = item.quantity
+    record.price = item.price
+    session.commit()
 
 
 def warehouse_select():
@@ -18,8 +23,10 @@ def warehouse_select():
     return "printed in terminal"
 
 
-def warehouse_delete(ID):
-    print("dupa")
+def warehouse_delete(record_id):
+    session.query(Warehouse).filter_by(id=record_id).delete()
+    session.commit()
+    return "record deleted"
 
 
 def client_select():
